@@ -16,22 +16,30 @@ public class Perceptron {
         this.numInput = numInput;
         weights = new double[numInput];
         threshold = -1;
-        learnRate = 0.5;
+        learnRate = 0.001;
     }
-    
-    public void training(int input[][], int output[]){
-        if(input.length != output.length || input[0].length != numInput){
+  
+    public void training(int input[][], int output[]) {
+        if (input.length != output.length || input[0].length != numInput) {
             System.out.print("Dados de entradas incorretos!");
             exit();
         }
-        for(int i = 0; i < output.length; i++){   
-            float error = output[i] - output(input[i]);
-            if(error != 0)
-                for(int j = 0; j < input[0].length; j++)
-                weights[j] += learnRate * input[i][j] * error;
-        }                
+        
+        boolean hasError = true;
+        while (hasError) {
+            hasError = false;
+            for (int i = 0; i < output.length; i++) {
+                float error = output[i] - output(input[i]);
+                if (error != 0) {
+                    for (int j = 0; j < weights.length; j++) {
+                        weights[j] += learnRate * input[i][j] * error;
+                    }
+                    hasError = true;
+                }
+            }
+        }
     }
-    
+
     public int output(int input[]) {
         int n = input.length;
         double sum = threshold;
