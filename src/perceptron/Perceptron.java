@@ -4,7 +4,7 @@ import static javafx.application.Platform.exit;
 
 /**
  *
- * @author Rafael
+ * @author Rafael Del Lama
  */
 public class Perceptron {
     private double weights[];
