@@ -28,7 +28,7 @@ public class main {
         int output[] = {0, 0, 0, 1};
                 
         Perceptron perceptron = new Perceptron(input[0].length);
-        perceptron.training(input, output);
+        perceptron.learn(input, output);
         
         int teste[] = {1,1};
         System.out.println(perceptron.output(teste));

@@ -19,7 +19,7 @@ public class Perceptron {
         learnRate = 0.001;
     }
   
-    public void training(int input[][], int output[]) {
+    public void learn(int input[][], int output[]) {
         if (input.length != output.length || input[0].length != numInput) {
             System.out.print("Dados de entradas incorretos!");
             exit();
