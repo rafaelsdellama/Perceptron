@@ -8,14 +8,14 @@ import static javafx.application.Platform.exit;
  */
 public class Perceptron {
     private double weights[];
-    private double threshold;
+    private double bias;
     private int numInput;
     private double learnRate;
     
     public Perceptron(int numInput) {
         this.numInput = numInput;
-        weights = new double[numInput];
-        threshold = -1;
+        weights = new double[numInput + 1];
+        bias = -1;
         learnRate = 0.001;
     }
   
@@ -29,10 +29,11 @@ public class Perceptron {
         while (hasError) {
             hasError = false;
             for (int i = 0; i < output.length; i++) {
-                float error = output[i] - output(input[i]);
+                float error = output[i] - sortNetwork(input[i]);
                 if (error != 0) {
-                    for (int j = 0; j < weights.length; j++) {
-                        weights[j] += learnRate * input[i][j] * error;
+                    weights[0] += learnRate * bias * error;
+                    for (int j = 0; j < numInput; j++) {
+                        weights[j+1] += learnRate * input[i][j] * error;
                     }
                     hasError = true;
                 }
@@ -40,26 +41,26 @@ public class Perceptron {
         }
     }
 
-    public int output(int input[]) {
+    public int sortNetwork(int input[]) {
         int n = input.length;
-        double sum = threshold;
+        double sum = bias * weights[0];
         for(int i = 0; i < n; i++)
-            sum = sum + input[i] * weights[i];
+            sum = sum + input[i] * weights[i+1];
         if(sum > 0)
             return 1;
         return 0;
     }
 
-    public void setThreshold(double threshold) {
-        this.threshold = threshold;
+    public void setBias(double threshold) {
+        this.bias = threshold;
     }
 
     public double[] getWeights() {
         return weights;
     }
 
-    public double getThreshold() {
-        return threshold;
+    public double getBias() {
+        return bias;
     }
     
     public void setWeights(double[] weights) {
