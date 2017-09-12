@@ -16,7 +16,7 @@ public class Perceptron {
     public Perceptron(int numInput, int numOutput) {
         this.numInput = numInput;
         this.numOutput = numOutput;
-        weights = new double[numInput + 1][numOutput];
+        weights = new double[numInput + 1][numOutput]; //numInput + 1 = peso do bias + pesos entradas
         bias = -1;
         learnRate = 0.001;
     }
